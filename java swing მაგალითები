@@ -1,0 +1,434 @@
+// ეს კოდი შექმნის ერთ ცარიელ ფანჯარას "Simple Window" სახელით, რომლის ზომაა 300x200 პიქსელი.
+// JFrame კლასის იმპორტი ფანჯრის შესაქმნელად
+import javax.swing.JFrame;
+
+public class SimpleWindow {
+    public static void main(String[] args) {
+        // JFrame ობიექტის შექმნა "Simple Window" სახელით
+        JFrame frame = new JFrame("Simple Window");
+        
+        // ფანჯრის ზომის დაყენება 300 სიგანისა და 200 სიმაღლის პიქსელებით
+        frame.setSize(300, 200);
+        
+        // ფანჯრის ხილვადობის დაყენება
+        frame.setVisible(true);
+        
+        // პროგრამის დასრულების დროს ფანჯრის დახურვა
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+}
+
+
+//ეს კოდი შექმნის ფანჯარას ლეიბლითა და ღილაკით. როდესაც მომხმარებელი დააჭერს ღილაკს, ლეიბლის ტექსტი შეიცვლება "Button clicked"-ით.
+// კლასების იმპორტი ღილაკის შესაქმნელად და მოვლენების დასამუშავებლად
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+public class ButtonExample extends JFrame implements ActionListener {
+    // JLabel და JButton ობიექტების გამოცხადება
+    private JLabel label;
+    private JButton button;
+
+    public ButtonExample() {
+        // FlowLayout განლაგების მენეჯერის დაყენება კონტეინერზე
+        setLayout(new FlowLayout());
+
+        // JLabel და JButton ობიექტების შექმნა
+        label = new JLabel("Click the button");
+        button = new JButton("Click me");
+
+        // ღონისძიების მოსმენის დაყენება ღილაკზე
+        button.addActionListener(this);
+
+        // კომპონენტების დამატება კონტეინერში
+        add(label);
+        add(button);
+
+        // ფანჯრის ზომის, ხილვადობისა და დახურვის ოპერაციის დაყენება
+        setSize(300, 100);
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public static void main(String[] args) {
+        new ButtonExample();
+    }
+
+    // ღილაკზე დაჭერის მოვლენის დამუშავება
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        label.setText("Button clicked");
+    }
+}
+
+
+//ეს კოდი შექმნის ფანჯარას ტექსტური ველითა და ღილაკით. მომხმარებელს შეეძლება შეიყვანოს ტექსტი ველში და დააჭიროს ღილაკს "Submit". შემდეგ პროგრამა გამოიტანს შეყვანილ ტექსტს კონსოლზე და გაასუფთავებს ტექსტურ ველს.
+// კლასების იმპორტი ჩეკბოქსის შესაქმნელად და მოვლენების დასამუშავებლად
+import java.awt.FlowLayout;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+public class CheckBoxExample extends JFrame implements ItemListener {
+    // JLabel და JCheckBox ობიექტების გამოცხადება
+    private JLabel label;
+    private JCheckBox checkbox;
+
+    public CheckBoxExample() {
+        // FlowLayout განლაგების მენეჯერის დაყენება კონტეინერზე
+        setLayout(new FlowLayout());
+
+        // JLabel და JCheckBox ობიექტების შექმნა
+        label = new JLabel("Select an option");
+        checkbox = new JCheckBox("Option");
+
+        // ღონისძიების მოსმენის დაყენება ჩეკბოქსზე
+        checkbox.addItemListener(this);
+
+        // კომპონენტების დამატება კონტეინერში
+        add(label);
+        add(checkbox);
+
+        // ფანჯრის ზომის, ხილვადობისა და დახურვის ოპ
+
+
+
+      //ეს კოდი შექმნის ფანჯარას ლეიბლითა და ორი რადიო ღილაკით. მომხმარებელს შეეძლება აირჩიოს ერთ-ერთი ვარიანტი. არჩეული ვარიანტის მიხედვით შეიცვლება ლეიბლის ტექსტი.
+      // კლასების იმპორტი კომბო-ბოქსის შესაქმნელად და მოვლენების დასამუშავებლად
+import java.awt.FlowLayout;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+public class ComboBoxExample extends JFrame implements ItemListener {
+    // JLabel და JComboBox ობიექტების გამოცხადება
+    private JLabel label;
+    private JComboBox<String> comboBox;
+
+    public ComboBoxExample() {
+        // FlowLayout განლაგების მენეჯერის დაყენება კონტეინერზე
+        setLayout(new FlowLayout());
+
+        // JLabel და JComboBox ობიექტების შექმნა
+        label = new JLabel("Select an option");
+        String[] options = {"Option 1", "Option 2", "Option 3"};
+        comboBox = new JComboBox<>(options);
+
+        // ღონისძიების მოსმენის დაყენება კომბო-ბოქსზე
+        comboBox.addItemListener(this);
+
+        // კომპონენტების დამატება კონტეინერში
+        add(label);
+        add(comboBox);
+
+        // ფანჯრის ზომის, ხილვადობისა და დახურვის ოპერაციის დაყენება
+        setSize(300, 150);
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public static void main(String[] args) {
+        new ComboBoxExample();
+    }
+
+    // კომბო-ბოქსიდან არჩევის მოვლენის დამუშავება
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        if (e.getStateChange() == ItemEvent.SELECTED) {
+            String selectedOption = (String) e.getItem();
+            label.setText("You selected: " + selectedOption);
+        }
+    }
+}
+
+
+      //ეს კოდი შექმნის ფანჯარას ლეიბლითა და ორი რადიო ღილაკით. მომხმარებელს შეეძლება აირჩიოს ერთ-ერთი ვარიანტი. არჩეული ვარიანტის მიხედვით შეიცვლება ლეიბლის ტექსტი.
+
+    // კლასების იმპორტი რადიო ღილაკების შესაქმნელად და მოვლენების დასამუშავებლად
+import java.awt.FlowLayout;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import javax.swing.ButtonGroup;
+import javax.swing.JFrame;
+import javax.swing.JRadioButton;
+import javax.swing.JLabel;
+
+public class RadioButtonExample extends JFrame implements ItemListener {
+    // JLabel და JRadioButton ობიექტების გამოცხადება
+    private JLabel label;
+    private JRadioButton radioButton1, radioButton2;
+
+    public RadioButtonExample() {
+        // FlowLayout განლაგების მენეჯერის დაყენება კონტეინერზე
+        setLayout(new FlowLayout());
+
+        // JLabel და JRadioButton ობიექტების შექმნა
+        label = new JLabel("Select an option");
+        radioButton1 = new JRadioButton("Option 1");
+        radioButton2 = new JRadioButton("Option 2");
+
+        // ღონისძიების მოსმენის დაყენება რადიო ღილაკებზე
+        radioButton1.addItemListener(this);
+        radioButton2.addItemListener(this);
+
+        // ButtonGroup-ის შექმნა და რადიო ღილაკების დამატება
+        ButtonGroup group = new ButtonGroup();
+        group.add(radioButton1);
+        group.add(radioButton2);
+
+        // კომპონენტების დამატება კონტეინერში
+        add(label);
+        add(radioButton1);
+        add(radioButton2);
+
+        // ფანჯრის ზომის, ხილვადობისა და დახურვის ოპერაციის დაყენება
+        setSize(300, 150);
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public static void main(String[] args) {
+        new RadioButtonExample();
+    }
+
+    // რადიო ღილაკზე არჩევის მოვლენის დამუშავება
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        if (e.getSource() == radioButton1) {
+            label.setText("Option 1 selected");
+        } else {
+            label.setText("Option 2 selected");
+        }
+    }
+}
+
+      
+      ეს კოდი შექმნის ფანჯარას ლეიბლითა და //კომბო-ბოქსით. კომბო-ბოქსში იქნება სამი ვარიანტი: "Option 1", "Option 2" და "Option 3". როდესაც მომხმარებელი აირჩევს ერთ-ერთ ვარიანტს, ლეიბლის ტექსტი შეიცვლება შესაბამისად.
+
+    // კლასების იმპორტი კომბო-ბოქსის შესაქმნელად და მოვლენების დასამუშავებლად
+import java.awt.FlowLayout;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+public class ComboBoxExample extends JFrame implements ItemListener {
+    // JLabel და JComboBox ობიექტების გამოცხადება
+    private JLabel label;
+    private JComboBox<String> comboBox;
+
+    public ComboBoxExample() {
+        // FlowLayout განლაგების მენეჯერის დაყენება კონტეინერზე
+        setLayout(new FlowLayout());
+
+        // JLabel და JComboBox ობიექტების შექმნა
+        label = new JLabel("Select an option");
+        String[] options = {"Option 1", "Option 2", "Option 3"};
+        comboBox = new JComboBox<>(options);
+
+        // ღონისძიების მოსმენის დაყენება კომბო-ბოქსზე
+        comboBox.addItemListener(this);
+
+        // კომპონენტების დამატება კონტეინერში
+        add(label);
+        add(comboBox);
+
+        // ფანჯრის ზომის, ხილვადობისა და დახურვის ოპერაციის დაყენება
+        setSize(300, 150);
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public static void main(String[] args) {
+        new ComboBoxExample();
+    }
+
+    // კომბო-ბოქსიდან არჩევის მოვლენის დამუშავება
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        if (e.getStateChange() == ItemEvent.SELECTED) {
+            String selectedOption = (String) e.getItem();
+            label.setText("You selected: " + selectedOption);
+        }
+    }
+}  
+
+//ეს კოდი შექმნის ფანჯარას მენიუთი. მენიუში იქნება ორი ქვემენიუ: "File" და "Edit". "File" ქვემენიუში იქნება პუნქტები "Open", "Save" და "Exit", ხოლო "Edit" ქვემენიუში - "Cut", "Copy" და "Paste". როდესაც მომხმარებელი აირჩევს რომელიმე პუნქტს, პროგრამა გამოიტანს შესაბამის შეტყობინებას დიალოგურ ფანჯარაში ან დახურავს აპლიკაციას (Exit პუნქტის შემთხვევაში).
+// კლასების იმპორტი მენიუს შესაქმნელად და მოვლენების დასამუშავებლად
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
+public class MenuExample extends JFrame implements ActionListener {
+    // JMenuBar, JMenu და JMenuItem ობიექტების გამოცხადება
+    private JMenuBar menuBar;
+    private JMenu fileMenu, editMenu;
+    private JMenuItem openItem, saveItem, exitItem, cutItem, copyItem, pasteItem;
+
+    public MenuExample() {
+        // JMenuBar და JMenu ობიექტების შექმნა
+        menuBar = new JMenuBar();
+        fileMenu = new JMenu("File");
+        editMenu = new JMenu("Edit");
+
+        // JMenuItem ობიექტების შექმნა და ღონისძიებების დამატება
+        openItem = new JMenuItem("Open");
+        openItem.addActionListener(this);
+        saveItem = new JMenuItem("Save");
+        saveItem.addActionListener(this);
+        exitItem = new JMenuItem("Exit");
+        exitItem.addActionListener(this);
+        cutItem = new JMenuItem("Cut");
+        cutItem.addActionListener(this);
+        copyItem = new JMenuItem("Copy");
+        copyItem.addActionListener(this);
+        pasteItem = new JMenuItem("Paste");
+        pasteItem.addActionListener(this);
+
+        // JMenuItem-ების დამატება JMenu-ებში
+        fileMenu.add(openItem);
+        fileMenu.add(saveItem);
+        fileMenu.addSeparator();
+        fileMenu.add(exitItem);
+        editMenu.add(cutItem);
+        editMenu.add(copyItem);
+        editMenu.add(pasteItem);
+
+        // JMenu-ების დამატება JMenuBar-ში
+        menuBar.add(fileMenu);
+        menuBar.add(editMenu);
+
+        // JMenuBar-ის დამატება ფანჯარაში
+        setJMenuBar(menuBar);
+
+        // ფანჯრის ზომის, ხილვადობისა და დახურვის ოპერაციის დაყენება
+        setSize(400, 300);
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public static void main(String[] args) {
+        new MenuExample();
+    }
+
+    // მენიუს პუნქტებზე მოქმედების მოვლენების დამუშავება
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == openItem) {
+            JOptionPane.showMessageDialog(this, "Open file");
+        } else if (e.getSource() == saveItem) {
+            JOptionPane.showMessageDialog(this, "Save file");
+        } else if (e.getSource() == exitItem) {
+            System.exit(0);
+        } else if (e.getSource() == cutItem) {
+            JOptionPane.showMessageDialog(this, "Cut text");
+        } else if (e.getSource() == copyItem) {
+            JOptionPane.showMessageDialog(this, "Copy text");
+        } else if (e.getSource() == pasteItem) {
+            JOptionPane.showMessageDialog(this, "Paste text");
+        }
+    }
+}
+
+//ეს კოდი შექმნის ფანჯარას ცხრილით. ცხრილს ექნება სამი სვეტი: "Name", "Age" და "City". ცხრილში იქნება 4 სტრიქონი მონაცემებით: სახელი, ასაკი და ქალაქი. მომხმარებელს შეეძლება დაათვალიეროს ამ მონაცემებს ცხრილში.
+      
+  // კლასების იმპორტი ცხრილის შესაქმნელად
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+public class TableExample extends JFrame {
+    // JTable და DefaultTableModel ობიექტების გამოცხადება
+    private JTable table;
+    private DefaultTableModel model;
+
+    public TableExample() {
+        // ცხრილის სათაურები
+        String[] columnNames = {"Name", "Age", "City"};
+
+        // ცხრილის მონაცემები
+        Object[][] data = {
+            {"John", 25, "New York"},
+            {"Jane", 30, "Chicago"},
+            {"Bob", 35, "Los Angeles"},
+            {"Alice", 40, "Houston"}
+        };
+
+        // DefaultTableModel ობიექტის შექმნა
+        model = new DefaultTableModel(data, columnNames);
+        table = new JTable(model);
+
+        // JScrollPane-ის შექმნა და ცხრილის დამატება
+        JScrollPane scrollPane = new JScrollPane(table);
+        add(scrollPane);
+
+        // ფანჯრის ზომის, ხილვადობისა და დახურვის ოპერაციის დაყენება
+        setSize(400, 200);
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public static void main(String[] args) {
+        new TableExample();
+    }
+}
+
+
+  //ეს კოდი შექმნის ფანჯარას, რომელშიც დახატული იქნება ორი წრე და ერთი სამკუთხედი. პირველი წრე იქნება მხოლოდ კონტურით, მეორე წრე შევსებული, ხოლო სამკუთხედი იქნება მხოლოდ კონტურით. ხატვა ხორციელდება DrawingPanel კლასის paintComponent() მეთოდში, რომელიც გადაფარავს JPanel კლასის იმავე მეთოდს.
+  // კლასების იმპორტი ხატვისთვის
+import java.awt.Graphics;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class DrawingExample extends JFrame {
+    // JPanel ობიექტის გამოცხადება
+    private DrawingPanel drawingPanel;
+
+    public DrawingExample() {
+        // DrawingPanel ობიექტის შექმნა
+        drawingPanel = new DrawingPanel();
+        add(drawingPanel);
+
+        // ფანჯრის ზომის, ხილვადობისა და დახურვის ოპერაციის დაყენება
+        setSize(400, 400);
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public static void main(String[] args) {
+        new DrawingExample();
+    }
+
+    // შიდა კლასი DrawingPanel ხატვისთვის
+    private class DrawingPanel extends JPanel {
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+
+            // წრეების დახატვა
+            g.drawOval(50, 50, 100, 100); // წრე 1
+            g.fillOval(200, 200, 80, 80); // შევსებული წრე 2
+
+            // სამკუთხედის დახატვა
+            int[] xPoints = {100, 200, 300};
+            int[] yPoints = {300, 200, 300};
+            g.drawPolygon(xPoints, yPoints, 3);
+        }
+    }
+}
+
+  
