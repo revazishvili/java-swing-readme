@@ -1,0 +1,94 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
+public class TaskOrganizer extends JFrame implements ActionListener {
+    private JTextField taskField, dateField;
+    private JList<String> taskList;
+    private DefaultListModel<String> listModel;
+    private JButton addButton, removeButton;
+    private ArrayList<Task> tasks;
+
+    public TaskOrganizer() {
+        // ფანჯრის კონფიგურაცია
+        setTitle("Task Organizer");
+        setSize(500, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+
+        // კომპონენტების შექმნა
+        taskField = new JTextField(20);
+        dateField = new JTextField(10);
+        listModel = new DefaultListModel<>();
+        taskList = new JList<>(listModel);
+        addButton = new JButton("Add");
+        removeButton = new JButton("Remove");
+        tasks = new ArrayList<>();
+
+        // მოვლენების დამუშავება
+        addButton.addActionListener(this);
+        removeButton.addActionListener(this);
+
+        // კომპონენტების დამატება კონტეინერში
+        JPanel topPanel = new JPanel();
+        topPanel.add(new JLabel("Task:"));
+        topPanel.add(taskField);
+        topPanel.add(new JLabel("Date (yyyy-MM-dd):"));
+        topPanel.add(dateField);
+        topPanel.add(addButton);
+        add(topPanel, BorderLayout.NORTH);
+
+        JPanel centerPanel = new JPanel();
+        centerPanel.add(new JScrollPane(taskList));
+        add(centerPanel, BorderLayout.CENTER);
+
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.add(removeButton);
+        add(bottomPanel, BorderLayout.SOUTH);
+    }
+
+    public static void main(String[] args) {
+        TaskOrganizer organizer = new TaskOrganizer();
+        organizer.setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == addButton) {
+            String taskText = taskField.getText();
+            String dateText = dateField.getText();
+            if (!taskText.isEmpty() && !dateText.isEmpty()) {
+                LocalDate date = LocalDate.parse(dateText, DateTimeFormatter.ISO_LOCAL_DATE);
+                Task task = new Task(taskText, date);
+                tasks.add(task);
+                listModel.addElement(task.toString());
+                taskField.setText("");
+                dateField.setText("");
+            }
+        } else if (e.getSource() == removeButton) {
+            int selectedIndex = taskList.getSelectedIndex();
+            if (selectedIndex != -1) {
+                tasks.remove(selectedIndex);
+                listModel.remove(selectedIndex);
+            }
+        }
+    }
+
+    private class Task {
+        private String text;
+        private LocalDate date;
+
+        public Task(String text, LocalDate date) {
+            this.text = text;
+            this.date = date;
+        }
+
+        @Override
+        public String toString() {
+            return date.format(DateTimeFormatter.ISO_LOCAL_DATE) + ": " + text;
+        }
+    }
+}
