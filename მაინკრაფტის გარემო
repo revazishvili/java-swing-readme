@@ -1,0 +1,50 @@
+import java.awt.*; // აქცდენა Java AWT პაკეტზე გრაფიკული პრიმიტივების გამოსახატად
+import javax.swing.*; // აქცდენა Swing პაკეტზე გრაფიკული ინტერფეისის შესაქმნელად
+
+public class MinecraftTerrain extends JPanel { // JPanel-ის გაფართოება MinecraftTerrain კლასისთვის
+
+    public MinecraftTerrain() {
+        setPreferredSize(new Dimension(800, 600)); // კომპონენტის ზომის დაყენება
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) { // ძირითადი მეთოდი გრაფიკული ელემენტების დასახატად
+        super.paintComponent(g); // მშობელი კლასის პაინტკომპონენტის გამოძახება
+        drawTerrain(g); // ლანდშაფტის დახატვის მეთოდის გამოძახება
+    }
+
+    private void drawTerrain(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g; // Graphics ობიექტის გადაყვანა Graphics2D-ში
+
+        // ფონის ფერი
+        g2d.setColor(new Color(128, 192, 255)); // ცისფერი ფონის ფერი
+        g2d.fillRect(0, 0, getWidth(), getHeight()); // ფონის გაფერადება
+
+        // მიწის ფერი
+        g2d.setColor(new Color(114, 72, 10)); // ყავისფერი მიწის ფერი
+
+        // ზედაპირის სიმაღლის წერტილების მასივი
+        int[] heights = new int[getWidth()]; // მასივი ზედაპირის სიმაღლეების შესანახად
+        for (int x = 0; x < getWidth(); x++) {
+            heights[x] = (int) (200 + 100 * Math.sin(x * 2 * Math.PI / 200)); // სიმაღლის გამოთვლა სინუსოიდალური ფუნქციით
+        }
+
+        // მიწის დახატვა
+        for (int x = 0; x < getWidth(); x++) {
+            g2d.drawLine(x, getHeight(), x, getHeight() - heights[x]); // ხაზის დახატვა მიწის ზედაპირზე
+        }
+    }
+
+    public static void main(String[] args) { // მთავარი მეთოდი პროგრამის გასაშვებად
+        SwingUtilities.invokeLater(new Runnable() { // ფანჯრის შექმნა Swing-ის EventDispatchThread-ზე
+            @Override
+            public void run() {
+                JFrame frame = new JFrame("Minecraft Terrain"); // ფანჯრის შექმნა
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // დახურვის ღილაკზე პროგრამის გამოსვლა
+                frame.setContentPane(new MinecraftTerrain()); // კონტენტის არე MinecraftTerrain კომპონენტზე
+                frame.pack(); // ფანჯრის ზომის მორგება კონტენტის არის შიგთავსზე
+                frame.setVisible(true); // ფანჯრის გამოჩენა
+            }
+        });
+    }
+}
